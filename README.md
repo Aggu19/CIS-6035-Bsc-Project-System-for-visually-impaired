@@ -171,14 +171,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Team
 
-- **Developer**: [Your Name]
-- **Supervisor**: [Supervisor Name]
-- **Institution**: [Your University/Institution]
+- **Developer**: [Arkam Rameez]
+- **Supervisor**: [Dr Kaneeka]
+- **Institution**: [ICBT / Cardiff Metropolitan University]
 
 ## 📞 Support
 
 For support and questions:
-- Email: [your-email@example.com]
+- Email: [moharkamm@gmail.com]
 - GitHub Issues: [Create an issue](https://github.com/Aggu19/CIS-6035-Bsc-Project-System-for-visually-impaired/issues)
 
 ## 🙏 Acknowledgments
