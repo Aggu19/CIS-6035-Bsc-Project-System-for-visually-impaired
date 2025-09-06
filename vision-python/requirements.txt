@@ -1,0 +1,15 @@
+# Versions compatible with Python 3.9–3.12 on Windows (prebuilt wheels)
+numpy>=1.26.4
+opencv-python>=4.9.0.80
+Pillow>=10.3.0
+pytesseract>=0.3.10
+gTTS>=2.5.1
+ultralytics>=8.2.0
+
+# PyTorch CPU wheels (install with default index first; if it fails, use the PyTorch CPU index URL)
+torch>=2.2.0
+torchvision>=0.17.0
+
+# Flask API dependencies
+Flask>=3.0.0
+Flask-CORS>=4.0.0
