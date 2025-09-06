@@ -39,20 +39,25 @@ const NavigationBar: React.FC = () => {
         position: 'fixed', 
         top: 0,
         left: 0,
-        width: '100%', 
+        width: '100vw', 
+        maxWidth: '100%',
         zIndex: 9999,
         transition: 'all 0.3s ease',
-        boxShadow: isScrolled ? '0 2px 20px rgba(0,0,0,0.5)' : 'none'
+        boxShadow: isScrolled ? '0 2px 20px rgba(0,0,0,0.5)' : 'none',
+        margin: 0,
+        padding: 0
       }}
     >
       <div style={{ 
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center', 
-        padding: '0 2rem',
+        padding: '0 1rem',
         maxWidth: '1200px',
         margin: '0 auto',
-        height: '80px'
+        height: '80px',
+        width: '100%',
+        boxSizing: 'border-box'
       }}>
         {/* Logo/Brand */}
         <Link 
@@ -120,7 +125,13 @@ function App() {
       <div style={{ 
         paddingTop: '80px',
         minHeight: '100vh',
-        background: 'black'
+        background: 'black',
+        width: '100vw',
+        maxWidth: '100%',
+        overflowX: 'hidden',
+        margin: 0,
+        paddingLeft: 0,
+        paddingRight: 0
       }}>
         <NavigationBar />
         <Routes>
