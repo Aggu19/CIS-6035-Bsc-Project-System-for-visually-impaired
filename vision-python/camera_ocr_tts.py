@@ -15,13 +15,13 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tessera
 
 # Load YOLO model
 def load_yolo_model():
-    """Load YOLO v11 model"""
+    """Load YOLO v8m fine-tuned model"""
     try:
-        model_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app', 'model', 'yolo11n.pt')
+        model_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'model', 'yolov8m.pt')
         if os.path.exists(model_path):
-            print(f"🤖 Loading YOLO model from: {model_path}")
+            print(f"🤖 Loading YOLO v8m fine-tuned model from: {model_path}")
             model = YOLO(model_path)
-            print("✅ YOLO model loaded successfully!")
+            print("✅ YOLO v8m model loaded successfully!")
             return model
         else:
             print(f"❌ YOLO model not found at: {model_path}")
@@ -79,7 +79,7 @@ def speak_text(text):
         print(f"📢 Text: {text}")
 
 def detect_objects(frame):
-    """Detect objects in frame using YOLO"""
+    """Detect objects in frame using YOLO v8m fine-tuned model"""
     global yolo_model, detection_results
     
     if yolo_model is None:
@@ -311,7 +311,7 @@ def main():
     global yolo_model
     
     print("=== Enhanced Camera Vision System ===")
-    print("Combining YOLO v11 Object Detection + OCR + Text-to-Speech")
+    print("Combining YOLO v8m Fine-tuned Object Detection + OCR + Text-to-Speech")
     print("=" * 50)
     
     # Load YOLO model
