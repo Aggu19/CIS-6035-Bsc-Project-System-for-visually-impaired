@@ -1,175 +1,219 @@
-# Enhanced Camera Vision System
+# Object Detection System for Visually Impaired Users
 
-A comprehensive computer vision application that combines **YOLO v11 Object Detection**, **OCR (Optical Character Recognition)**, and **Text-to-Speech** capabilities.
+A comprehensive computer vision system designed to assist visually impaired users by identifying objects and checking product expiration dates using camera input and AI models.
 
-## 🚀 Features
+## 🌟 Features
 
-### 🤖 **YOLO v11 Object Detection**
-- Real-time object detection using YOLO v11n model
-- Detects 80+ common objects (people, cars, animals, etc.)
-- Visual bounding boxes with confidence scores
-- Audio description of detected objects
+### 1. **Object Detection**
+- Uses custom YOLO model (`my_model.pt`) for object identification
+- User-friendly, conversational feedback
+- Real-time camera processing
+- Multiple camera support (built-in, external, DSLR)
 
-### 📝 **OCR (Optical Character Recognition)**
-- Extract text from camera feed
-- Supports multiple languages
-- Real-time text recognition
-- Audio reading of detected text
+### 2. **Expiration Date Scanner**
+- OCR-based date detection (no model required)
+- Smart date selection from multiple dates
+- Context-aware keyword recognition
+- Safety assessment for food consumption
 
-### 🔊 **Text-to-Speech**
-- Converts detected text to speech
-- Windows-compatible audio playback
-- Graceful fallback if audio fails
+### 3. **Camera Management**
+- Automatic camera detection and selection
+- Support for DSLR cameras via virtual devices
+- Easy camera switching during runtime
+- Camera refresh functionality
 
-### 📹 **Multi-Camera Support**
-- Automatic camera detection
-- Support for internal and external cameras
-- Easy camera switching
-- Robust error handling
-
-## 🛠️ Installation
+## 🚀 Quick Start
 
 ### Prerequisites
-1. **Python 3.8+**
-2. **Tesseract OCR** - Download from [GitHub](https://github.com/UB-Mannheim/tesseract/wiki)
-3. **YOLO v11 Model** - Place `yolo11n.pt` in `app/model/` folder
+- Python 3.8+
+- OpenCV
+- Ultralytics YOLO
+- Tesseract OCR
+- Required Python packages (see requirements.txt)
 
-### Setup Steps
+### Installation
 
-1. **Install Python dependencies:**
+1. **Install Tesseract OCR:**
+   - Download from: https://github.com/UB-Mannheim/tesseract/wiki
+   - Install to default location: `C:\Program Files\Tesseract-OCR\`
+
+2. **Install Python dependencies:**
    ```bash
-   pip install -r requirements.txt
+   pip install opencv-python ultralytics pytesseract gtts
    ```
 
-2. **Install Tesseract OCR:**
-   - Download and install from: https://github.com/UB-Mannheim/tesseract/wiki
-   - Default installation path: `C:\Program Files\Tesseract-OCR\`
-
-3. **Verify YOLO model:**
-   - Ensure `yolo11n.pt` is in `app/model/` directory
-   - The script will automatically detect and load the model
-
-## 🎮 Usage
+3. **Place your custom model:**
+   - Ensure `my_model.pt` is in the `vision-python` folder
 
 ### Running the Application
+
 ```bash
-python camera_ocr_tts.py
+cd vision-python
+python app.py
 ```
 
-### Controls
-- **SPACE** - Capture and read text (OCR only)
-- **O** - Detect and describe objects (YOLO only)
-- **B** - Both OCR and object detection (Combined)
-- **C** - Change camera
-- **R** - Refresh camera list
-- **ESC** - Exit
+## 🎮 Controls
 
-### Demo Scenarios
+| Key | Function |
+|-----|----------|
+| **SPACE** | Detect and identify objects |
+| **E** | Scan expiration date |
+| **C** | Change camera |
+| **R** | Refresh camera list |
+| **ESC** | Exit system |
 
-#### 1. **Text Recognition Demo**
-- Point camera at text (books, signs, documents)
-- Press **SPACE**
-- System will read the text aloud
+## 📱 Usage Examples
 
-#### 2. **Object Detection Demo**
-- Point camera at objects (people, cars, animals)
-- Press **O**
-- System will describe what it sees
+### Object Detection
+```
+Press SPACE while holding an object in front of the camera:
 
-#### 3. **Combined Demo**
-- Point camera at scene with both text and objects
-- Press **B**
-- System will describe both objects and read any text
+Output: "Mate, you've got a Kottu Me in your hand!"
+```
+
+### Expiration Date Scanning
+```
+Press E while showing the expiration date:
+
+Output: "✅ GOOD: This product is safe to consume! It expires on March 20, 2024 (in 45 days)."
+```
+
+## 🧠 Smart Features
+
+### Object Detection
+- **Conversational feedback**: Natural language responses
+- **Confidence levels**: "I'm pretty sure about this detection"
+- **Position descriptions**: "It's positioned in the center of your view"
+- **Multiple objects**: Handles multiple items in one view
+
+### Expiration Date Scanner
+- **Context-aware selection**: Recognizes keywords like "EXP", "Best Before", "Use By"
+- **Multiple date handling**: Smart selection from multiple dates
+- **Safety warnings**: Clear guidance on consumption safety
+- **Date format support**: DD/MM/YYYY, MM/DD/YYYY, Month DD YYYY, etc.
+
+## 🔍 Supported Date Formats
+
+The expiration scanner recognizes these date formats:
+- `DD/MM/YYYY` (e.g., 20/03/2024)
+- `MM/DD/YYYY` (e.g., 03/20/2024)
+- `YYYY/MM/DD` (e.g., 2024/03/20)
+- `DD-MM-YYYY` (e.g., 20-03-2024)
+- `DD.MM.YYYY` (e.g., 20.03.2024)
+- `Month DD, YYYY` (e.g., Mar 20, 2024)
+- `DD Month YYYY` (e.g., 20 Mar 2024)
+
+## 🎯 Expiration Status Messages
+
+### Safe to Consume
+- ✅ **GOOD**: Product is safe, expires in more than 7 days
+- ✅ **OK**: Product is safe, expires within 7 days
+
+### Caution Required
+- ⚠️ **CAUTION**: Product expires within 3 days
+- ⚠️ **URGENT**: Product expires today
+
+### Unsafe
+- ⚠️ **WARNING**: Product has expired
+
+## 📁 File Structure
+
+```
+vision-python/
+├── app.py                 # Main application
+├── my_model.pt           # Custom YOLO model
+├── README.md             # This file
+└── requirements.txt      # Python dependencies
+```
 
 ## 🔧 Technical Details
 
-### Model Information
-- **YOLO v11n**: Lightweight model for real-time detection
-- **Tesseract**: Open-source OCR engine
-- **gTTS**: Google Text-to-Speech for audio output
+### Object Detection
+- **Model**: Custom YOLO model (`my_model.pt`)
+- **Confidence threshold**: 0.5
+- **Input resolution**: 1280x720 (optimized)
+- **Processing**: Real-time frame analysis
 
-### Performance Optimizations
-- Confidence threshold: 0.5 for object detection
-- Frame resolution: 1280x720
-- Frame rate: 30 FPS
-- Thread-safe detection results
+### Expiration Date Scanner
+- **OCR Engine**: Tesseract
+- **Preprocessing**: Grayscale conversion, noise reduction, adaptive thresholding
+- **Context analysis**: 20-character window around each date
+- **Keyword scoring**: +10 for expiry keywords, -5 for manufacturing keywords
 
-### Error Handling
-- Graceful camera switching
-- Audio fallback mechanisms
-- Robust model loading
-- Comprehensive error messages
+### Camera Support
+- **Backends**: DirectShow, Media Foundation, Fallback
+- **Virtual devices**: Canon EOS Webcam Utility, EOS Webcam Utility Pro
+- **Auto-detection**: Scans first 10 camera indices
+- **Error handling**: Automatic reconnection attempts
 
-## 🎯 Use Cases
-
-### Accessibility
-- **Visual impairment assistance**: Describe surroundings
-- **Reading assistance**: Read text from documents
-- **Navigation aid**: Identify objects and signs
-
-### Education
-- **Language learning**: Read text in different languages
-- **Object recognition**: Learn object names
-- **Interactive learning**: Combine visual and audio feedback
-
-### Productivity
-- **Document scanning**: Quick text extraction
-- **Inventory management**: Object counting and identification
-- **Quality control**: Visual inspection with text verification
-
-## 🚨 Troubleshooting
+## 🛠️ Troubleshooting
 
 ### Common Issues
 
-1. **Camera not detected:**
-   - Close other applications using the camera
-   - Disconnect and reconnect web camera
-   - Check camera drivers
+1. **"No working cameras found"**
+   - Check camera connection
+   - Ensure no other applications are using the camera
+   - Try disconnecting and reconnecting the camera
 
-2. **YOLO model not loading:**
-   - Verify `yolo11n.pt` is in correct location
+2. **"Failed to load the detection model"**
+   - Verify `my_model.pt` exists in the vision-python folder
    - Check file permissions
-   - Ensure sufficient disk space
 
-3. **Audio not working:**
-   - Check system audio settings
-   - Verify audio drivers
-   - Try different audio output devices
+3. **"Could not find any expiration dates"**
+   - Ensure good lighting
+   - Position the date clearly in the camera view
+   - Try different angles or distances
 
-4. **OCR not working:**
-   - Verify Tesseract installation
-   - Check Tesseract path in script
-   - Ensure text is clearly visible
+4. **Poor OCR accuracy**
+   - Improve lighting conditions
+   - Hold the product steady
+   - Ensure text is clearly visible and not blurry
 
-### Performance Tips
-- Use good lighting for better detection
-- Keep camera steady for OCR
-- Close unnecessary applications
-- Use SSD for faster model loading
+### Camera Issues
+- **DSLR not detected**: Install Canon EOS Webcam Utility
+- **Camera switching problems**: Use 'R' to refresh camera list
+- **Poor video quality**: Check camera settings and lighting
 
 ## 🔮 Future Enhancements
 
-### Planned Features
-- **Custom model training**: Train on specific objects
-- **Multi-language support**: OCR in multiple languages
-- **Gesture recognition**: Hand gesture controls
-- **Cloud integration**: Upload results to cloud
-- **Mobile app**: Android/iOS companion app
+- [ ] Text-to-speech integration
+- [ ] Voice commands
+- [ ] Haptic feedback
+- [ ] Distance estimation
+- [ ] Object relationship descriptions
+- [ ] Batch processing mode
+- [ ] Custom confidence thresholds
+- [ ] Multi-language support
 
-### Potential Improvements
-- **Real-time processing**: Continuous detection mode
-- **Advanced filtering**: Object and text filtering options
-- **Export capabilities**: Save results to files
-- **API integration**: Connect to external services
+## 📝 Development Notes
 
-## 📄 License
+### Adding New Object Classes
+1. Retrain the YOLO model with new classes
+2. Replace `my_model.pt` with the updated model
+3. Update class names in the detection output
 
-This project is open source and available under the MIT License.
+### Improving OCR Accuracy
+1. Adjust preprocessing parameters in `preprocess_image_for_ocr()`
+2. Modify Tesseract configuration in `pytesseract.image_to_string()`
+3. Add more date format patterns in `extract_dates_from_text()`
+
+### Adding New Keywords
+1. Update `expiry_keywords` list for expiration date detection
+2. Update `manufacture_keywords` list for manufacturing date detection
+3. Adjust scoring weights as needed
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
+This system is designed for accessibility and user-friendliness. When contributing:
+- Maintain conversational, user-friendly language
+- Test with actual visually impaired users when possible
+- Prioritize clear error messages and guidance
+- Ensure all feedback is helpful and actionable
+
+## 📄 License
+
+This project is part of a BSc Final Project for visually impaired users.
 
 ---
 
-**Happy Vision Computing! 🎉** 
+**Note**: This system is designed to assist visually impaired users but should not be the sole method for determining food safety. Always follow proper food safety guidelines and consult with healthcare professionals when in doubt about product safety.
